@@ -1,1 +1,23 @@
-<p>listar-recomendacion works!</p>
+<div class="container mt-5">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h2 class="text-center mb-0">📚 Recomendaciones</h2>
+    <button class="btn btn-success" (click)="nuevaRecomendacion()">➕ Nueva</button>
+  </div>
+
+  <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+    <div class="col" *ngFor="let recomendacion of listaRecomendacion">
+      <div class="card h-100 shadow-sm">
+        <div class="card-body">
+          <h5 class="card-title">{{ recomendacion.titulo }}</h5>
+          <p class="card-text"><strong>Autor:</strong> {{ recomendacion.autor }}</p>
+          <p class="card-text"><strong>Razón:</strong> {{ recomendacion.razon }}</p>
+          <p class="card-text text-muted"><strong>Fecha:</strong> {{ recomendacion.fecha | date:'short' : 'UTC'}}</p>
+        </div>
+        <div class="card-footer d-flex justify-content-between">
+          <button class="btn btn-outline-primary btn-sm" (click)="editar(recomendacion.id)">Editar</button>
+          <button class="btn btn-outline-danger btn-sm" (click)="eliminar(recomendacion.id)">Eliminar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

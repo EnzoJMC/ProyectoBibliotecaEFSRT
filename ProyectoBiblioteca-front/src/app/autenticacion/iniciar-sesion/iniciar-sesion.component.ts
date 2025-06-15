@@ -1,10 +1,15 @@
-import { Component } from '@angular/core';
+
+import { Component, OnInit } from '@angular/core';
+
 
 @Component({
   selector: 'app-iniciar-sesion',
   templateUrl: './iniciar-sesion.component.html',
   styleUrl: './iniciar-sesion.component.css'
 })
-export class IniciarSesionComponent {
-
+export class IniciarSesionComponent implements OnInit {
+  
+  ngOnInit(): void {
+ 
+  }
 }

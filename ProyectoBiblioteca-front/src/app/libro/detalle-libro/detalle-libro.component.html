@@ -1,1 +1,13 @@
-<p>detalle-libro works!</p>
+<div class="container mt-4">
+  <h2>📘 Detalle del Libro</h2>
+  <div *ngIf="libro" class="card mt-3 p-3">
+    <h4>{{ libro.titulo }}</h4>
+    <p><strong>Autor:</strong> {{ libro.autor }}</p>
+    <p><strong>Año de publicación:</strong> {{ libro.anioPublicacion }}</p>
+    <p><strong>Resumen:</strong> {{ libro.resumen }}</p>
+    <img [src]="libro.imagenPortada" alt="Portada" class="img-thumbnail" width="150">
+  </div>
+  <div class="mt-3">
+  <button class="btn btn-secondary" (click)="volver()">🔙 Volver</button>
+</div>
+</div>

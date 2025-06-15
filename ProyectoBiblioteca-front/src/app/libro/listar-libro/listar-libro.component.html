@@ -1,1 +1,28 @@
-<p>listar-libro works!</p>
+<div class="container mt-4">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h2 class="mb-0">📚 Catálogo de Libros</h2>
+    <div>
+      <button class="btn btn-primary me-2" (click)="irACrearLibro()">➕ Nuevo libro</button>
+      <button class="btn btn-danger" (click)="logout()">Cerrar sesión</button>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-4 mb-4" *ngFor="let libro of listaLibros">
+      <div class="card h-100 shadow-sm">
+        <img [src]="libro.imagenPortada" class="card-img-top" alt="Portada del libro" style="height: 300px; object-fit: cover;">
+        <div class="card-body">
+          <h5 class="card-title">{{ libro.titulo }}</h5>
+          <p class="card-text"><strong>Autor:</strong> {{ libro.autor }}</p>
+          <p class="card-text"><strong>Año:</strong> {{ libro.anioPublicacion }}</p>
+          <p class="card-text text-truncate"><strong>Resumen:</strong> {{ libro.resumen }}</p>
+        </div>
+        <div class="card-footer d-flex justify-content-between">
+          <button class="btn btn-info btn-sm" (click)="verDetalleLibro(libro.id)">🔍 Ver más</button>
+          <button class="btn btn-success btn-sm" (click)="irAEditarLibro(libro.id)">✏️ Editar</button>
+          <button class="btn btn-danger btn-sm" (click)="eliminarLibro(libro.id)">🗑️ Eliminar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
