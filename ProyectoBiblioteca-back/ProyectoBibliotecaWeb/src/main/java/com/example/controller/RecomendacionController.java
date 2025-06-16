@@ -17,7 +17,7 @@ import com.example.model.Recomendacion;
 import com.example.service.RecomendacionService;
 
 @RestController
-@RequestMapping("/recomendaciones")
+@RequestMapping("/api/recomendaciones")
 public class RecomendacionController {
 	
 	@Autowired

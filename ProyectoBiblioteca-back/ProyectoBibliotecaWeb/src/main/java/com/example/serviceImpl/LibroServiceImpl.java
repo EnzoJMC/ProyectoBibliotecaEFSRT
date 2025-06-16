@@ -106,6 +106,7 @@ public class LibroServiceImpl implements LibroService{
 	            libroNuevo.setTitulo(libro.getTitulo());
 	            libroNuevo.setAnioPublicacion(libro.getAnioPublicacion());
 	            libroNuevo.setAutor(libro.getAutor());
+	            libroNuevo.setCategoria(libro.getCategoria());
 	            libroNuevo.setResumen(libro.getResumen());
 	            libroNuevo.setImagenPortada(libro.getImagenPortada());
 	            
@@ -141,6 +142,31 @@ public class LibroServiceImpl implements LibroService{
 		       response.put("status", HttpStatus.BAD_REQUEST);
 		       return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
 		   }
+	}
+
+	@Override
+	public ResponseEntity<Map<String, Object>> obtenerLibroPorCategoria(String categoria) {
+		Map<String, Object> response = new HashMap<>();
+
+	    try {
+	        List<Libro> librosPorCategoria = libroRepository.findByCategoria(categoria);
+
+	        if (librosPorCategoria.isEmpty()) {
+	            response.put("mensaje", "No se encontraron libros en la categoría: " + categoria);
+	            response.put("status", HttpStatus.NOT_FOUND);
+	            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+	        } else {
+	            response.put("mensaje", "Libros encontrados en la categoría: " + categoria);
+	            response.put("status", HttpStatus.OK);
+	            response.put("libros", librosPorCategoria);
+	            return ResponseEntity.status(HttpStatus.OK).body(response);
+	        }
+
+	    } catch (Exception e) {
+	        response.put("mensaje", "Error al buscar libros por categoría: " + e.getMessage());
+	        response.put("status", HttpStatus.BAD_REQUEST);
+	        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+	    }
 	}
 
 

@@ -9,6 +9,9 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import com.example.model.Usuario;
@@ -16,7 +19,7 @@ import com.example.repository.UsuarioRepository;
 import com.example.service.UsuarioService;
 
 @Service
-public class UsuarioServiceImpl implements UsuarioService {
+public class UsuarioServiceImpl implements UsuarioService, UserDetailsService {
 	
 	@Autowired
     private UsuarioRepository usuarioRepository;
@@ -128,4 +131,13 @@ public class UsuarioServiceImpl implements UsuarioService {
             return ResponseEntity.status(HttpStatus.OK).body(response);
         }
     }
+
+	@Override
+	public UserDetails loadUserByUsername(String correo) throws UsernameNotFoundException {
+		// TODO Auto-generated method stub
+		Usuario usuario = usuarioRepository.findOneByCorreo(correo)
+				.orElseThrow(() -> new UsernameNotFoundException("El usuario con email: " + correo + "no esta registrado."));
+		
+		return new UserDetailImplement(usuario);
+	}
 }

@@ -13,6 +13,7 @@ public interface LibroService {
 	public ResponseEntity<Map<String,Object>> eliminarLibro(Long id);
 	public ResponseEntity<Map<String,Object>> actualizarLibro(Long id, Libro libro);
 	public ResponseEntity<Map<String,Object>> obtenerLibro(Long id);
+	public ResponseEntity<Map<String,Object>> obtenerLibroPorCategoria(String categoria);
 
 	
 }

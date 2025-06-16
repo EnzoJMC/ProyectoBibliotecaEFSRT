@@ -18,7 +18,7 @@ import com.example.model.Libro;
 import com.example.service.LibroService;
 
 @RestController
-@RequestMapping("/libros")
+@RequestMapping("/api/libros")
 public class LibroController {
 
 	@Autowired
@@ -60,6 +60,9 @@ public class LibroController {
         return libroService.eliminarLibro(id);
     }
 
-  
+    @GetMapping("/categoria/{categoria}")
+    public ResponseEntity<Map<String, Object>> obtenerLibrosPorCategoria(@PathVariable String categoria) {
+        return libroService.obtenerLibroPorCategoria(categoria);
+    }
 	
 }
