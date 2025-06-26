@@ -46,17 +46,31 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 	
 	@Override
 	protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain,
-			Authentication authResult) throws IOException, ServletException {
-		
-		UserDetailImplement userDetail = (UserDetailImplement) authResult.getPrincipal();
-		
-		String token = Token.crearToken(userDetail.getUsername(), userDetail.getUserTipe());
-		
-		response.addHeader("Authorization", "Bearer " + token);
-		
-		response.getWriter().flush();
-		
-		super.successfulAuthentication(request, response, chain, authResult);
+	        Authentication authResult) throws IOException, ServletException {
+
+	    UserDetailImplement userDetail = (UserDetailImplement) authResult.getPrincipal();
+
+	    String token = Token.crearToken(userDetail.getUsername(), userDetail.getUserTipe());
+
+	    // Construimos la respuesta en formato JSON
+	    String jsonResponse = new ObjectMapper().writeValueAsString(
+	        Collections.singletonMap("token", token)
+	    );
+
+	    // Si quieres incluir también el tipo:
+	    /*
+	    Map<String, String> body = new HashMap<>();
+	    body.put("token", token);
+	    body.put("tipo", userDetail.getUserTipe());
+
+	    String jsonResponse = new ObjectMapper().writeValueAsString(body);
+	    */
+
+	    // Configuramos la respuesta
+	    response.setContentType("application/json");
+	    response.setCharacterEncoding("UTF-8");
+	    response.getWriter().write(jsonResponse);
+	    response.getWriter().flush();
 	}
 	
 	

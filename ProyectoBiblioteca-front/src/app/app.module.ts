@@ -10,7 +10,8 @@ import { ListarLibroComponent } from './libro/listar-libro/listar-libro.componen
 import { FormularioRecomendacionComponent } from './recomendacion/formulario-recomendacion/formulario-recomendacion.component';
 import { ListarRecomendacionComponent } from './recomendacion/listar-recomendacion/listar-recomendacion.component';
 import { DetalleLibroComponent } from './libro/detalle-libro/detalle-libro.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { AuthInterceptor } from './helpers/auth.interceptor';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,11 @@ import { HttpClientModule } from '@angular/common/http';
     ReactiveFormsModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [{
+    provide: HTTP_INTERCEPTORS,
+    useClass: AuthInterceptor,
+    multi: true
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -9,22 +9,23 @@ import { DetalleLibroComponent } from './libro/detalle-libro/detalle-libro.compo
 
 import { ListarRecomendacionComponent } from './recomendacion/listar-recomendacion/listar-recomendacion.component';
 import { FormularioRecomendacionComponent } from './recomendacion/formulario-recomendacion/formulario-recomendacion.component';
+import { IniciarSesionComponent } from './autenticacion/iniciar-sesion/iniciar-sesion.component';
 
 const routes: Routes = [
  
-  { path: '', redirectTo: 'libros', pathMatch: 'full' },
+  { path: '', redirectTo: 'login', pathMatch: 'full' },
 
  
   { path: 'libros', component: ListarLibroComponent },
   { path: 'libros/nuevo', component: FormularioLibroComponent },
   { path: 'libros/editar/:id', component: FormularioLibroComponent },
   { path: 'libros/detalle/:id', component: DetalleLibroComponent },
-
+  { path: 'login', component: IniciarSesionComponent },
 
   { path: 'recomendaciones', component: ListarRecomendacionComponent },
   { path: 'recomendaciones/nuevo', component: FormularioRecomendacionComponent },
   { path: 'recomendaciones/editar/:id', component: FormularioRecomendacionComponent },
-
+ 
   
 ];
 

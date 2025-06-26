@@ -1,18 +1,24 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { BASE_URL } from '../api.routes';
 
 @Injectable({
   providedIn: 'root'
 })
+
+
 export class LibroServiceService {
 
-  private urlBase = 'http://localhost:8080/libros';
+  private urlBase = BASE_URL + '/libros';
+
+ 
 
   constructor(private http: HttpClient) {}
 
   listarLibros(): Observable<any> {
     return this.http.get(`${this.urlBase}/listar`);
+    
   }
 
   obtenerLibroPorId(id: number): Observable<any> {
