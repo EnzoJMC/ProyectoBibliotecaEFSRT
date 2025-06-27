@@ -1,13 +1,23 @@
 <div class="container mt-4">
-  <h2>📘 Detalle del Libro</h2>
-  <div *ngIf="libro" class="card mt-3 p-3">
-    <h4>{{ libro.titulo }}</h4>
-    <p><strong>Autor:</strong> {{ libro.autor }}</p>
-    <p><strong>Año de publicación:</strong> {{ libro.anioPublicacion }}</p>
-    <p><strong>Resumen:</strong> {{ libro.resumen }}</p>
-    <img [src]="libro.imagenPortada" alt="Portada" class="img-thumbnail" width="150">
+  <h2 class="mb-4">📘 Detalle del Libro</h2>
+
+  <div *ngIf="libro" class="card shadow-lg p-4">
+    <div class="row">
+      <!-- Imagen del libro -->
+      <div class="col-md-4 text-center mb-3 mb-md-0">
+        <img [src]="libro.imagenPortada" alt="Portada" class="img-fluid rounded" style="max-height: 400px; object-fit: cover;">
+      </div>
+
+      <!-- Detalles del libro -->
+      <div class="col-md-8">
+        <h3 class="mb-3">{{ libro.titulo }}</h3>
+        <p><strong>Autor:</strong> {{ libro.autor }}</p>
+        <p><strong>Año de publicación:</strong> {{ libro.anioPublicacion }}</p>
+        <p><strong>Resumen:</strong></p>
+        <p style="text-align: justify;">{{ libro.resumen }}</p>
+
+        <button class="btn btn-secondary mt-4" (click)="volver()">🔙 Volver</button>
+      </div>
+    </div>
   </div>
-  <div class="mt-3">
-  <button class="btn btn-secondary" (click)="volver()">🔙 Volver</button>
-</div>
 </div>

@@ -4,6 +4,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,6 +17,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.model.Usuario;
 import com.example.service.UsuarioService;
+
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jwts;
+import jakarta.servlet.http.HttpServletRequest;
 
 @RestController
 @RequestMapping("/api/usuarios")
@@ -38,7 +43,7 @@ public class UsuarioController {
     }
 
     // POST: guardar un nuevo usuario
-    @PostMapping
+    @PostMapping("/crear")
     public ResponseEntity<Map<String, Object>> guardarUsuario(@RequestBody Usuario usuario) {
         return usuarioService.guardarUsuario(usuario);
     }
@@ -53,5 +58,19 @@ public class UsuarioController {
     @DeleteMapping("/{id}")
     public ResponseEntity<Map<String, Object>> eliminarUsuario(@PathVariable Long id) {
         return usuarioService.eliminarUsuario(id);
+    }
+    
+    
+    @GetMapping("/perfil")
+    public ResponseEntity<Map<String, Object>> obtenerPerfil(HttpServletRequest request) {
+        String token = request.getHeader("Authorization").replace("Bearer ", "");
+        Claims claims = Jwts.parserBuilder()
+            .setSigningKey("iXCsfxpwysFZJ4P27FMlSm9THCYiHJpZ".getBytes())
+            .build()
+            .parseClaimsJws(token)
+            .getBody();
+
+        String email = claims.getSubject(); 
+        return usuarioService.buscarPorEmail(email);
     }
 }

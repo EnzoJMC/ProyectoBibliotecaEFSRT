@@ -1,9 +1,15 @@
 <div class="container mt-4">
-  <div class="d-flex justify-content-between align-items-center mb-4">
+  <div class="d-flex justify-content-between align-items-center mb-2">
     <h2 class="mb-0">📚 Catálogo de Libros</h2>
-    <div>
-      <button class="btn btn-primary me-2" (click)="irACrearLibro()">➕ Nuevo libro</button>
-      <button class="btn btn-danger" (click)="logout()">Cerrar sesión</button>
+    <div class="text-end">
+      <p class="mb-1" *ngIf="usuario">
+        <span class="fw-bold text-primary">👤 {{ usuario.correo }}</span>
+      </p>
+      <div>
+        <button class="btn btn-outline-info me-2" (click)="verMisRecomendaciones()">📄 Mis Recomendaciones</button>
+        <button class="btn btn-primary me-2" (click)="irACrearRecomendacion()">💡 Crear recomendación</button>
+        <button class="btn btn-danger" (click)="logout()">Cerrar sesión</button>
+      </div>
     </div>
   </div>
 
@@ -17,10 +23,8 @@
           <p class="card-text"><strong>Año:</strong> {{ libro.anioPublicacion }}</p>
           <p class="card-text text-truncate"><strong>Resumen:</strong> {{ libro.resumen }}</p>
         </div>
-        <div class="card-footer d-flex justify-content-between">
+        <div class="card-footer d-flex justify-content-center">
           <button class="btn btn-info btn-sm" (click)="verDetalleLibro(libro.id)">🔍 Ver más</button>
-          <button class="btn btn-success btn-sm" (click)="irAEditarLibro(libro.id)">✏️ Editar</button>
-          <button class="btn btn-danger btn-sm" (click)="eliminarLibro(libro.id)">🗑️ Eliminar</button>
         </div>
       </div>
     </div>

@@ -55,9 +55,9 @@ export class IniciarSesionComponent implements OnInit {
 
               // Redirigir según tipo
               if (tipo === 'administrador') {
-                this.route.navigate(['/recomendaciones']);
-              } else if (tipo === 'cliente') {
                 this.route.navigate(['/libros']);
+              } else if (tipo === 'cliente') {
+                this.route.navigate(['/vistaAdmin']);
               } else {
                 this.alertaError('Tipo de usuario desconocido');
               }

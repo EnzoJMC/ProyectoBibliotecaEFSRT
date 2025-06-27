@@ -1,0 +1,23 @@
+<div class="container mt-4">
+  <h3 class="mb-4">📋 Total de Recomendaciones</h3>
+
+  <div *ngIf="listaRecomendaciones.length > 0; else sinRecomendaciones">
+    <ul class="list-group shadow-sm">
+      <li *ngFor="let rec of listaRecomendaciones" class="list-group-item d-flex justify-content-between align-items-start flex-column flex-md-row gap-2">
+        <div class="flex-grow-1">
+          <h5 class="mb-1">{{ rec.titulo }}</h5>
+          <p class="mb-1"><strong>Autor:</strong> {{ rec.autor }}</p>
+          <p class="mb-1"><strong>Usuario:</strong> {{ rec.usuario?.nombre }} ({{ rec.usuario?.correo }})</p>
+          <p class="mb-1"><strong>Fecha:</strong> {{ rec.fecha | date:'medium' }}</p>
+        </div>
+        <div>
+          <button class="btn btn-outline-primary btn-sm" (click)="verDetalles(rec.id)">🔍 Ver Detalle</button>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <ng-template #sinRecomendaciones>
+    <div class="alert alert-warning text-center">No hay recomendaciones disponibles.</div>
+  </ng-template>
+</div>

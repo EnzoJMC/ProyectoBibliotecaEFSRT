@@ -45,7 +45,7 @@ public class LibroController {
     }
 
     // POST: guardar un nuevo libro
-    @PostMapping
+    @PostMapping("/crear")
     public ResponseEntity<Map<String, Object>> guardarLibro(@RequestBody Libro libro) {
         return libroService.guardarLibro(libro);
     }

@@ -140,4 +140,29 @@ public class UsuarioServiceImpl implements UsuarioService, UserDetailsService {
 		
 		return new UserDetailImplement(usuario);
 	}
+
+	@Override
+	public ResponseEntity<Map<String, Object>> buscarPorEmail(String email) {
+	    Map<String, Object> response = new HashMap<>();
+
+	    try {
+	        Optional<Usuario> usuarioOpt = usuarioRepository.findOneByCorreo(email);
+	        
+	        if (usuarioOpt.isPresent()) {
+	            response.put("mensaje", "Usuario encontrado.");
+	            response.put("usuario", usuarioOpt.get());
+	            response.put("status", HttpStatus.OK);
+	            return ResponseEntity.status(HttpStatus.OK).body(response);
+	        } else {
+	            response.put("mensaje", "Usuario no encontrado con el correo: " + email);
+	            response.put("status", HttpStatus.NOT_FOUND);
+	            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+	        }
+	    } catch (Exception e) {
+	        response.put("mensaje", "Error al buscar usuario: " + e.getMessage());
+	        response.put("status", HttpStatus.INTERNAL_SERVER_ERROR);
+	        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
+	    }
+	}
+
 }

@@ -35,12 +35,12 @@ public class RecomendacionController {
         return recomendacionService.obtenerRecomendacion(id);
     }
     
-    @GetMapping("recomendacionesUsuario/{id}")
+    @GetMapping("/recomendacionesUsuario/{id}")
     public ResponseEntity<Map<String, Object>> obtenerRecomendacionesPorUsuario(@PathVariable Long id) {
         return recomendacionService.obtenerRecomendacionesPorUsuario(id);
     }
 
-    @PostMapping
+    @PostMapping("/crear")
     public ResponseEntity<Map<String, Object>> guardarRecomendacion(@RequestBody Recomendacion recomendacion) {
         return recomendacionService.guardarRecomendacion(recomendacion);
     }

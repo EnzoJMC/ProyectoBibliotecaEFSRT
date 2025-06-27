@@ -1,0 +1,28 @@
+<div class="container mt-5">
+  <div class="card shadow">
+    <div class="card-header bg-primary text-white">
+      <h4 class="mb-0">📄 Detalle de la Recomendación</h4>
+    </div>
+    <div class="card-body" *ngIf="recomendacion">
+      <p><strong>📖 Título:</strong> {{ recomendacion.titulo }}</p>
+      <p><strong>✍️ Autor:</strong> {{ recomendacion.autor }}</p>
+      <p><strong>📝 Razón de la Recomendación:</strong></p>
+      <div class="border p-3 rounded bg-light">
+        {{ recomendacion.razon }}
+      </div>
+      <p class="mt-3"><strong>📅 Fecha:</strong> {{ recomendacion.fecha | date: 'fullDate' }} {{ recomendacion.fecha | date: 'shortTime' }}</p>
+      <hr />
+      <p><strong>👤 Usuario:</strong> {{ recomendacion.usuario?.nombre }}</p>
+      <p><strong>✉️ Correo:</strong> {{ recomendacion.usuario?.correo }}</p>
+
+      <div class="mt-4">
+        <button class="btn btn-secondary" (click)="volver()">🔙 Volver</button>
+      </div>
+    </div>
+
+    <div *ngIf="!recomendacion" class="p-4 text-center">
+      <div class="spinner-border text-primary" role="status"></div>
+      <p class="mt-3">Cargando recomendación...</p>
+    </div>
+  </div>
+</div>

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { RecomendacionService } from '../../servicio/recomendacion.service';
+import { UsuarioService } from '../../servicio/usuario.service';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 
@@ -10,25 +11,45 @@ import Swal from 'sweetalert2';
 })
 export class ListarRecomendacionComponent implements OnInit {
 
-  listaRecomendacion : any[] = [];
+  listaRecomendacion: any[] = [];
+  usuarioId?: number;
 
   constructor(
     private recomendacionService: RecomendacionService,
+    private usuarioService: UsuarioService,
     private router: Router
   ) {}
 
   ngOnInit(): void {
-    this.cargarRecomendaciones();
+    this.obtenerPerfilYRecomendaciones();
   }
 
-  cargarRecomendaciones(): void {
-    this.recomendacionService.obtenerRecomendaciones().subscribe({
-      next: (data) => {
-        this.listaRecomendacion = data.recomendaciones;
-        console.log(data)
+  obtenerPerfilYRecomendaciones(): void {
+  this.usuarioService.obtenerPerfil().subscribe({
+    next: (resp) => {
+      this.usuarioId = resp.usuario.id;
+      if (this.usuarioId !== undefined) {
+        this.cargarRecomendacionesPorUsuario(this.usuarioId);
+      } else {
+        console.error('ID de usuario no disponible.');
+        Swal.fire('Error', 'No se obtuvo el ID del usuario.', 'error');
+      }
+    },
+    error: (error) => {
+      console.error('❌ Error al obtener perfil:', error);
+      Swal.fire('Error', 'No se pudo obtener el perfil del usuario.', 'error');
+    }
+  });
+}
+
+  cargarRecomendacionesPorUsuario(idUsuario: number): void {
+    this.recomendacionService.obtenerRecomendacionesPorUsuario(idUsuario).subscribe({
+      next: (resp) => {
+        this.listaRecomendacion = resp.recomendacion;
+        console.log('✅ Recomendaciones del usuario:', this.listaRecomendacion);
       },
       error: (error) => {
-        console.error('❌ Error al obtener recomendaciones:', error);
+        console.error('❌ Error al obtener recomendaciones del usuario:', error);
         Swal.fire('Error', 'No se pudieron cargar las recomendaciones.', 'error');
       }
     });
@@ -54,7 +75,7 @@ export class ListarRecomendacionComponent implements OnInit {
       if (result.isConfirmed) {
         this.recomendacionService.eliminarRecomendacion(id).subscribe({
           next: () => {
-            this.cargarRecomendaciones();
+            this.cargarRecomendacionesPorUsuario(this.usuarioId!);
             Swal.fire('Eliminado', 'La recomendación fue eliminada exitosamente.', 'success');
           },
           error: (error) => {

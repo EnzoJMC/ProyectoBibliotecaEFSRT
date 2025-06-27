@@ -14,5 +14,5 @@ public interface UsuarioService {
 	public ResponseEntity<Map<String,Object>> eliminarUsuario(Long id);
 	public ResponseEntity<Map<String,Object>> actualizarUsuario(Long id, Usuario usuario);
 	public ResponseEntity<Map<String,Object>> obtenerUsuario(Long id);
-
+	public ResponseEntity<Map<String,Object>> buscarPorEmail(String email);
 }

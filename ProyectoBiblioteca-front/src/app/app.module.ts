@@ -12,6 +12,11 @@ import { ListarRecomendacionComponent } from './recomendacion/listar-recomendaci
 import { DetalleLibroComponent } from './libro/detalle-libro/detalle-libro.component';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { AuthInterceptor } from './helpers/auth.interceptor';
+import { VistaAdminComponent } from './vista-admin/vista-admin.component';
+import { MantenimientoLibroComponent } from './libro/mantenimiento-libro/mantenimiento-libro.component';
+import { TotalRecomendacionesComponent } from './recomendacion/total-recomendaciones/total-recomendaciones.component';
+import { DetalleRecomendacionComponent } from './recomendacion/detalle-recomendacion/detalle-recomendacion.component';
+import { MantenimientoUsuarioComponent } from './usuario/mantenimiento-usuario/mantenimiento-usuario.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +27,12 @@ import { AuthInterceptor } from './helpers/auth.interceptor';
     ListarLibroComponent,
     FormularioRecomendacionComponent,
     ListarRecomendacionComponent,
-    DetalleLibroComponent
+    DetalleLibroComponent,
+    VistaAdminComponent,
+    MantenimientoLibroComponent,
+    TotalRecomendacionesComponent,
+    DetalleRecomendacionComponent,
+    MantenimientoUsuarioComponent
   ],
   imports: [
     BrowserModule,

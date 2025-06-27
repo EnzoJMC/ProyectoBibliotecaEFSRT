@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { RecomendacionService } from '../../servicio/recomendacion.service';
+import { UsuarioService } from '../../servicio/usuario.service';
 
 @Component({
   selector: 'app-formulario-recomendacion',
@@ -14,21 +15,27 @@ export class FormularioRecomendacionComponent implements OnInit {
   formRecomendacion: FormGroup;
   modo: 'crear' | 'editar' = 'crear';
   idRecomendacion?: number;
+  usuarioId?: number;
+usuario?: any; 
+
 
   constructor(
     private fb: FormBuilder,
     private recomendacionService: RecomendacionService,
+    private usuarioService: UsuarioService,
     private route: ActivatedRoute,
     private router: Router
   ) {
     this.formRecomendacion = this.fb.group({
       titulo: ['', Validators.required],
       autor: ['', Validators.required],
-      razon: ['', Validators.required],
+      razon: ['', [Validators.required, Validators.minLength(10)]],
     });
   }
 
   ngOnInit(): void {
+    this.obtenerPerfilUsuario();
+
     const idParam = this.route.snapshot.paramMap.get('id');
     if (idParam) {
       this.modo = 'editar';
@@ -37,15 +44,35 @@ export class FormularioRecomendacionComponent implements OnInit {
     }
   }
 
+  obtenerPerfilUsuario(): void {
+  this.usuarioService.obtenerPerfil().subscribe({
+    next: (resp) => {
+      this.usuarioId = resp.usuario.id;
+      this.usuario = resp.usuario; 
+    },
+    error: (err) => {
+      console.error('Error al obtener perfil', err);
+      Swal.fire('Error', 'No se pudo obtener el perfil del usuario.', 'error');
+    }
+  });
+}
+
   cargarRecomendacion(id: number): void {
-    this.recomendacionService.obtenerRecomendacionesPorUsuario(id).subscribe({
-      next: (data) => this.formRecomendacion.patchValue(data.recomendacion),
-      error: (err) => console.error('Error al cargar recomendación', err)
+    this.recomendacionService.obtenerRecomendacion(id).subscribe({
+      next: (resp) => {
+        if (resp.recomendacion) {
+          this.formRecomendacion.patchValue(resp.recomendacion);
+        }
+      },
+      error: (err) => {
+        console.error('Error al cargar recomendación', err);
+        Swal.fire('Error', 'No se pudo cargar la recomendación.', 'error');
+      }
     });
   }
 
   onSubmit(): void {
-    if (this.formRecomendacion.invalid) {
+    if (this.formRecomendacion.invalid || !this.usuarioId) {
       Swal.fire('Error', 'Completa todos los campos', 'warning');
       return;
     }
@@ -53,7 +80,7 @@ export class FormularioRecomendacionComponent implements OnInit {
     const recomendacion = {
       ...this.formRecomendacion.value,
       fecha: new Date(),
-      usuario: { id: 1 } 
+      usuario: { id: this.usuarioId }
     };
 
     if (this.modo === 'crear') {
@@ -62,7 +89,10 @@ export class FormularioRecomendacionComponent implements OnInit {
           Swal.fire('Guardado', 'Recomendación registrada correctamente', 'success');
           this.router.navigate(['/recomendaciones']);
         },
-        error: (err) => console.error('Error al registrar recomendación', err)
+        error: (err) => {
+          console.error('Error al registrar recomendación', err);
+          Swal.fire('Error', 'No se pudo registrar la recomendación.', 'error');
+        }
       });
     } else if (this.idRecomendacion) {
       this.recomendacionService.actualizarRecomendacion(this.idRecomendacion, recomendacion).subscribe({
@@ -70,13 +100,15 @@ export class FormularioRecomendacionComponent implements OnInit {
           Swal.fire('Actualizado', 'Recomendación actualizada correctamente', 'success');
           this.router.navigate(['/recomendaciones']);
         },
-        error: (err) => console.error('Error al actualizar recomendación', err)
+        error: (err) => {
+          console.error('Error al actualizar recomendación', err);
+          Swal.fire('Error', 'No se pudo actualizar la recomendación.', 'error');
+        }
       });
     }
   }
 
   cancelar(): void {
-    this.router.navigate(['/recomendaciones']);
+    this.router.navigate(['/libros']);
   }
-
 }
