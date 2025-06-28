@@ -5,7 +5,11 @@
     <div class="row">
       <!-- Imagen del libro -->
       <div class="col-md-4 text-center mb-3 mb-md-0">
-        <img [src]="libro.imagenPortada" alt="Portada" class="img-fluid rounded" style="max-height: 400px; object-fit: cover;">
+        <img [src]="'http://localhost:8080/' + libro.imagenPortada"
+     class="card-img-top"
+     alt="Portada del libro"
+     style="height: 300px; object-fit: cover;"
+     />
       </div>
 
       <!-- Detalles del libro -->

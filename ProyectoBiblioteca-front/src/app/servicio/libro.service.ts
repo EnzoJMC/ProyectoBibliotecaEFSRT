@@ -26,7 +26,7 @@ export class LibroServiceService {
   }
 
   crearLibro(libro: any): Observable<any> {
-    return this.http.post(`${this.urlBase}`, libro);
+    return this.http.post(`${this.urlBase}/crear`, libro);
   }
 
   actualizarLibro(id: number, libro: any): Observable<any> {

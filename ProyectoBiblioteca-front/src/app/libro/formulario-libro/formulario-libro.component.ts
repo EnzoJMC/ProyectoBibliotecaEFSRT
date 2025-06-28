@@ -23,11 +23,12 @@ export class FormularioLibroComponent implements OnInit {
     private router: Router
   ) {
     this.formLibro = this.fb.group({
-      titulo: ['', Validators.required],
-      autor: ['', Validators.required],
-      resumen: ['', Validators.required],
-      anioPublicacion: [null, [Validators.required, Validators.min(0)]]
-    });
+  titulo: [''],
+  autor: [''],
+  anioPublicacion: [''],
+  resumen: [''],
+  categoria: [''], // 👈 nuevo campo
+});
   }
 
   ngOnInit(): void {
@@ -85,7 +86,7 @@ export class FormularioLibroComponent implements OnInit {
       this.libroService.crearLibro(libro).subscribe({
         next: () => {
           Swal.fire('Guardado', 'Libro registrado correctamente', 'success');
-          this.router.navigate(['/libros']);
+          this.router.navigate(['/mantenimientoLibros']);
         },
         error: (err) => console.error('Error al registrar libro', err)
       });
@@ -101,6 +102,6 @@ export class FormularioLibroComponent implements OnInit {
   }
 
   cancelar(): void {
-    this.router.navigate(['/libros']);
+    this.router.navigate(['/mantenimientoLibros']);
   }
 }

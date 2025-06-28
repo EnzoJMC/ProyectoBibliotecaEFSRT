@@ -10,7 +10,7 @@ import Swal from 'sweetalert2'
   styleUrl: './listar-libro.component.css'
 })
 export class ListarLibroComponent implements OnInit {
-
+baseImageUrl: string = 'http://localhost:8080/';
     listaLibros: any[] = [];
     usuario: any;
   constructor(
