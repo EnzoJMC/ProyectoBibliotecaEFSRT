@@ -17,6 +17,8 @@ import { MantenimientoLibroComponent } from './libro/mantenimiento-libro/manteni
 import { TotalRecomendacionesComponent } from './recomendacion/total-recomendaciones/total-recomendaciones.component';
 import { DetalleRecomendacionComponent } from './recomendacion/detalle-recomendacion/detalle-recomendacion.component';
 import { MantenimientoUsuarioComponent } from './usuario/mantenimiento-usuario/mantenimiento-usuario.component';
+import { HeaderComponent } from './header/header.component';
+import { FooterComponent } from './footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +34,9 @@ import { MantenimientoUsuarioComponent } from './usuario/mantenimiento-usuario/m
     MantenimientoLibroComponent,
     TotalRecomendacionesComponent,
     DetalleRecomendacionComponent,
-    MantenimientoUsuarioComponent
+    MantenimientoUsuarioComponent,
+    HeaderComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,

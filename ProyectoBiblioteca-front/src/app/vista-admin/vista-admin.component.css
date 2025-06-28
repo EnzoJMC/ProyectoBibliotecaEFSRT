@@ -1,8 +1,51 @@
-.card h4 {
-  color: #2c3e50;
-}
-
-.card:hover {
-  transform: scale(1.02);
-  transition: all 0.3s ease-in-out;
-}
+  .feature-card {
+      background-color: white;
+      border-radius: 10px;
+      padding: 30px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease;
+      text-align: center;
+  }
+  .feature-card:hover {
+      transform: translateY(-10px);
+  }
+  .btn {
+      display: inline-block;
+      padding: 12px 20px;
+      border-radius: 30px;
+      font-weight: 500;
+      transition: transform 0.3s ease, background-color 0.3s ease;
+  }
+  
+  .btn-primary {
+      background-color: #6C5B7B;
+      color: white;
+  }
+  .btn-primary:hover {
+      background-color: #C06C84;
+  }
+  .btn-success {
+      background-color: #F8B195;
+      color: white;
+  }
+  .btn-success:hover {
+      background-color: #F67280;
+  }
+  .btn-dark {
+      background-color: #333;
+      color: white;
+  }
+  .btn-dark:hover {
+      background-color: #555;
+  }
+  .elegant-title {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+  }
+  .elegant-subtitle {
+      font-size: 1.1rem;
+      max-width: 600px;
+      margin: 0 auto 30px;
+      color: #666;
+  }

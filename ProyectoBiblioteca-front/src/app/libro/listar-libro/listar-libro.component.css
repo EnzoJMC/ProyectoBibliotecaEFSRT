@@ -1,0 +1,165 @@
+/* Contenedor con proporción 3:4 */
+.portada-container {
+  position: relative;
+  width: 100%;
+  padding-top: 133.33%;
+  background: #f0f8ff; /* Fondo suave */
+  border-radius: 10px 10px 0 0;
+  overflow: hidden;
+}
+
+.portada-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  padding: 10px;
+}
+
+/* Tarjeta pequeña y elegante */
+.feature-card {
+  max-width: 220px;
+  font-size: 0.85rem;
+  margin: auto;
+  border: none;
+  border-radius: 12px;
+  background: linear-gradient(145deg, #ffffff, #e6e6e6);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.feature-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* Título y textos */
+.feature-card .card-title {
+  font-size: 1rem;
+  color: #0d6efd;
+  font-weight: bold;
+}
+
+.feature-card .card-text {
+  font-size: 0.8rem;
+  color: #333;
+}
+
+/* Botón */
+.feature-card .btn {
+  font-size: 0.75rem;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-weight: 500;
+  transition: background-color 0.3s ease;
+}
+
+.feature-card .btn-info {
+  background-color: #0dcaf0;
+  border: none;
+  color: #fff;
+}
+
+.feature-card .btn-info:hover {
+  background-color: #0bbce0;
+}
+
+/* Opcional: animación al entrar */
+.feature-card {
+  animation: fadeInUp 0.4s ease both;
+}
+
+.elegant-title {
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: #0d6efd;
+  font-family: 'Segoe UI', 'Roboto', sans-serif;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+  position: relative;
+  display: inline-block;
+  padding-bottom: 8px;
+  border-bottom: 3px solid #0dcaf0;
+  animation: fadeInTitle 0.6s ease-out both;
+}
+
+.menu-acciones {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+}
+
+/* Botones elegantes */
+.menu-acciones .btn {
+  border-radius: 30px;
+  padding: 8px 16px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.08);
+}
+
+.menu-acciones .btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Personalización de colores */
+.menu-acciones .btn-outline-info {
+  border-color: #0dcaf0;
+  color: #0dcaf0;
+  background-color: transparent;
+}
+
+.menu-acciones .btn-outline-info:hover {
+  background-color: #0dcaf0;
+  color: white;
+}
+
+.menu-acciones .btn-primary {
+  background-color: #0d6efd;
+  border: none;
+}
+
+.menu-acciones .btn-primary:hover {
+  background-color: #0b5ed7;
+}
+
+.menu-acciones .btn-danger {
+  background-color: #dc3545;
+  border: none;
+}
+
+.menu-acciones .btn-danger:hover {
+  background-color: #bb2d3b;
+}
+
+/* Estilo para los botones negros */
+.btn-black {
+  background-color: #000;
+  color: #fff;
+  border: none;
+  border-radius: 30px;
+  padding: 8px 16px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+}
+
+.btn-black:hover {
+  background-color: #222;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 14px rgba(0, 0, 0, 0.2);
+}
+
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

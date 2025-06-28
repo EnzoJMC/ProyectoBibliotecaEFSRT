@@ -1,0 +1,14 @@
+<header class="main-header" *ngIf="!esPaginaLogin">
+  <div class="container d-flex justify-content-between align-items-center py-3">
+    <h1 class="logo mb-0">📖 Librería</h1>
+
+    <nav class="d-flex align-items-center">
+      <!-- Mostrar el correo del usuario autenticado -->
+      <span *ngIf="usuario" class="usuario-correo">
+  <i class="bi bi-person-circle me-1"></i>{{ usuario.correo }}
+</span>
+
+
+    </nav>
+  </div>
+</header>

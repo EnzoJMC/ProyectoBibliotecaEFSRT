@@ -38,39 +38,44 @@ export class IniciarSesionComponent implements OnInit {
   }
 
   login() {
-    if (this.formLogin.valid) {
-      this._loginService.ingresar(this.formLogin.value)
-        .subscribe({
-          next: (res: any) => {
-            console.log("Response: ", res);
+  if (this.formLogin.valid) {
+    this._loginService.ingresar(this.formLogin.value).subscribe({
+      next: (res: any) => {
+        console.log("Response: ", res);
 
-            if (res && res.token) {
-             
-              localStorage.setItem('token', res.token);
+        if (res && res.token) {
+          // Guarda el token
+          localStorage.setItem('token', res.token);
 
-             
-              const decoded = this.decodeToken(res.token);
-              const tipo = decoded.tipoUsuario;
-              localStorage.setItem('tipo', tipo);
+          // Decodifica el token
+          const decoded = this.decodeToken(res.token);
+          const tipo = decoded.tipoUsuario;
+          const correo = decoded.sub || decoded.email || decoded.correo; // ajusta según tu token
 
-              // Redirigir según tipo
-              if (tipo === 'administrador') {
-                this.route.navigate(['/libros']);
-              } else if (tipo === 'cliente') {
-                this.route.navigate(['/vistaAdmin']);
-              } else {
-                this.alertaError('Tipo de usuario desconocido');
-              }
-            } else {
-              this.alertaError("Respuesta inválida del servidor");
-            }
-          },
-          error: (err: HttpErrorResponse) => {
-            this.alertaError("Correo o contraseña incorrecta");
+          // Guarda tipo y correo
+          localStorage.setItem('tipo', tipo);
+          localStorage.setItem('correo', correo);
+
+          // Redirige según tipo
+          if (tipo === 'administrador') {
+            this.route.navigate(['/libros']);
+          } else if (tipo === 'cliente') {
+            this.route.navigate(['/vistaAdmin']);
+          } else {
+            this.alertaError('Tipo de usuario desconocido');
           }
-        });
-    }
+
+        } else {
+          this.alertaError("Respuesta inválida del servidor");
+        }
+      },
+      error: (err: HttpErrorResponse) => {
+        this.alertaError("Correo o contraseña incorrecta");
+      }
+    });
   }
+}
+
 
   alertaError(message: string) {
     Swal.fire({

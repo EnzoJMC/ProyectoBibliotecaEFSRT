@@ -1,0 +1,55 @@
+
+  :root {
+      --color-primary: #4B3F72;
+      --color-secondary: #FF5E7D;
+      --color-accent: #59C3C3;
+      --text-color: #2B2D42;
+      --light-bg: #F7EBE8;
+      --card-accent-1: #FFEE93;
+      --card-accent-2: #B5EAD7;
+      --card-accent-3: #C9CBFF;
+  }
+
+  .feature-card {
+      background: linear-gradient(135deg, white 0%, var(--light-bg) 100%);
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      border-left: 5px solid;
+  }
+
+  .feature-card:nth-child(1) {
+      border-left-color: var(--card-accent-1);
+  }
+
+  .feature-card:nth-child(2) {
+      border-left-color: var(--card-accent-2);
+  }
+
+  .feature-card:nth-child(3) {
+      border-left-color: var(--card-accent-3);
+  }
+
+  .feature-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+  }
+
+  .btn-outline-primary {
+      border-color: var(--color-primary);
+      color: var(--color-primary);
+      transition: background-color 0.3s ease, color 0.3s ease;
+  }
+
+  .btn-outline-primary:hover {
+      background-color: var(--color-primary);
+      color: white;
+  }
+
+  .elegant-title {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      color: var(--color-primary);
+  }
