@@ -9,27 +9,28 @@ import Swal from 'sweetalert2'
   templateUrl: './listar-libro.component.html',
   styleUrl: './listar-libro.component.css'
 })
+
 export class ListarLibroComponent implements OnInit {
-baseImageUrl: string = 'http://localhost:8080/';
-    listaLibros: any[] = [];
-    usuario: any;
+  baseImageUrl: string = 'http://localhost:8080/';
+  listaLibros: any[] = [];
+  librosAgrupados: any[][] = [];
+  usuario: any;
+
   constructor(
     private libroService: LibroServiceService,
     private router: Router,
     private usuarioService: UsuarioService
   ) {}
-  
 
   ngOnInit(): void {
     this.obtenerLibros();
-    this.obtenerPerfilUsuario(); 
+    this.obtenerPerfilUsuario();
   }
 
-obtenerPerfilUsuario(): void {
+  obtenerPerfilUsuario(): void {
     this.usuarioService.obtenerPerfil().subscribe({
       next: (response) => {
         this.usuario = response.usuario;
-        console.log('Perfil:', this.usuario);
       },
       error: (error) => console.error('Error al obtener perfil', error)
     });
@@ -39,56 +40,33 @@ obtenerPerfilUsuario(): void {
     this.libroService.listarLibros().subscribe({
       next: (data) => {
         this.listaLibros = data.libros;
-        console.log(data)
+        this.librosAgrupados = this.agruparLibros(this.listaLibros, 3);
       },
       error: (error) => console.error('Error al obtener libros', error)
     });
   }
 
-  /*
-
-  irACrearLibro(): void {
-    this.router.navigate(['/libros/nuevo']);
+  agruparLibros(libros: any[], grupoTam: number): any[][] {
+    const grupos = [];
+    for (let i = 0; i < libros.length; i += grupoTam) {
+      grupos.push(libros.slice(i, i + grupoTam));
+    }
+    return grupos;
   }
 
-  irAEditarLibro(id: number): void {
-    this.router.navigate(['/libros/editar', id]);
-  }
-
-  eliminarLibro(id: number): void {
-    Swal.fire({
-      title: '¿Eliminar este libro?',
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonText: 'Sí, eliminar',
-      cancelButtonText: 'Cancelar'
-    }).then(result => {
-      if (result.isConfirmed) {
-        this.libroService.eliminarLibro(id).subscribe({
-          next: () => {
-            this.listaLibros = this.listaLibros.filter(libro => libro.id !== id);
-            Swal.fire('Eliminado', 'El libro fue eliminado correctamente.', 'success');
-          },
-          error: (err) => console.error('Error al eliminar', err)
-        });
-      }
-    });
-  }
-
-
-
-*/
   verDetalleLibro(id: number): void {
-  this.router.navigate(['/libros/detalle', id]);
-}
-irACrearRecomendacion(): void {
-  this.router.navigate(['/recomendaciones/nuevo']);
-}
+    this.router.navigate(['/libros/detalle', id]);
+  }
+
+  irACrearRecomendacion(): void {
+    this.router.navigate(['/recomendaciones/nuevo']);
+  }
+
   logout(): void {
     this.router.navigate(['/login']);
   }
 
   verMisRecomendaciones(): void {
-  this.router.navigate(['/recomendaciones']);
-}
+    this.router.navigate(['/recomendaciones']);
+  }
 }
