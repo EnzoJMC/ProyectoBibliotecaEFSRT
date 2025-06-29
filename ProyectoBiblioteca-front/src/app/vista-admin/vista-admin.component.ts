@@ -21,4 +21,8 @@ export class VistaAdminComponent {
   irAUsuarios(): void {
     this.router.navigate(['/usuarios']);
   }
+
+  irAReservas(): void {
+    this.router.navigate(['/totalReservas']);
+  }
 }

@@ -62,6 +62,10 @@ export class ListarLibroComponent implements OnInit {
     this.router.navigate(['/recomendaciones/nuevo']);
   }
 
+  irAMisReservas(): void {
+    this.router.navigate(['/reservasUsuario']);
+  }
+
   logout(): void {
     this.router.navigate(['/login']);
   }

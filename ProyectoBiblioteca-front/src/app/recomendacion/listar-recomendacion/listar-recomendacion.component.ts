@@ -36,7 +36,7 @@ export class ListarRecomendacionComponent implements OnInit {
       }
     },
     error: (error) => {
-      console.error('❌ Error al obtener perfil:', error);
+      console.error(' Error al obtener perfil:', error);
       Swal.fire('Error', 'No se pudo obtener el perfil del usuario.', 'error');
     }
   });
@@ -46,10 +46,10 @@ export class ListarRecomendacionComponent implements OnInit {
     this.recomendacionService.obtenerRecomendacionesPorUsuario(idUsuario).subscribe({
       next: (resp) => {
         this.listaRecomendacion = resp.recomendacion;
-        console.log('✅ Recomendaciones del usuario:', this.listaRecomendacion);
+        console.log(' Recomendaciones del usuario:', this.listaRecomendacion);
       },
       error: (error) => {
-        console.error('❌ Error al obtener recomendaciones del usuario:', error);
+        console.error(' Error al obtener recomendaciones del usuario:', error);
         Swal.fire('Error', 'No se pudieron cargar las recomendaciones.', 'error');
       }
     });
@@ -79,7 +79,7 @@ export class ListarRecomendacionComponent implements OnInit {
             Swal.fire('Eliminado', 'La recomendación fue eliminada exitosamente.', 'success');
           },
           error: (error) => {
-            console.error('❌ Error al eliminar la recomendación:', error);
+            console.error(' Error al eliminar la recomendación:', error);
             Swal.fire('Error', 'No se pudo eliminar la recomendación.', 'error');
           }
         });

@@ -19,6 +19,8 @@ import { DetalleRecomendacionComponent } from './recomendacion/detalle-recomenda
 import { MantenimientoUsuarioComponent } from './usuario/mantenimiento-usuario/mantenimiento-usuario.component';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
+import { ReservasUsuarioComponent } from './reservas/reservas-usuario/reservas-usuario.component';
+import { ReservasTotalesComponent } from './reservas/reservas-totales/reservas-totales.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +38,9 @@ import { FooterComponent } from './footer/footer.component';
     DetalleRecomendacionComponent,
     MantenimientoUsuarioComponent,
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    ReservasUsuarioComponent,
+    ReservasTotalesComponent
   ],
   imports: [
     BrowserModule,

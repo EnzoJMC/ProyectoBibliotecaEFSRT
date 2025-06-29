@@ -15,6 +15,8 @@ import { MantenimientoLibroComponent } from './libro/mantenimiento-libro/manteni
 import { TotalRecomendacionesComponent } from './recomendacion/total-recomendaciones/total-recomendaciones.component';
 import { DetalleRecomendacionComponent } from './recomendacion/detalle-recomendacion/detalle-recomendacion.component';
 import { MantenimientoUsuarioComponent } from './usuario/mantenimiento-usuario/mantenimiento-usuario.component';
+import { ReservasUsuarioComponent } from './reservas/reservas-usuario/reservas-usuario.component';
+import { ReservasTotalesComponent } from './reservas/reservas-totales/reservas-totales.component';
 
 const routes: Routes = [
  
@@ -38,6 +40,8 @@ const routes: Routes = [
   {path: 'mantenimientoLibros', component: MantenimientoLibroComponent},
  {path: 'totalRecomendaciones', component: TotalRecomendacionesComponent},
   
+  {path: 'reservasUsuario', component: ReservasUsuarioComponent},
+{path: 'totalReservas', component:  ReservasTotalesComponent},
 ];
 
 @NgModule({

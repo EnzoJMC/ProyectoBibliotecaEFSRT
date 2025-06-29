@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, NavigationEnd } from '@angular/router';
 import { UsuarioService } from '../servicio/usuario.service';
+import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-header',
@@ -9,33 +10,51 @@ import { UsuarioService } from '../servicio/usuario.service';
 export class HeaderComponent implements OnInit {
   usuario: any;
   esPaginaLogin: boolean = false;
-constructor(
-    
+
+  constructor(
     private router: Router,
     private usuarioService: UsuarioService
   ) {}
-  ngOnInit() {
-    this.router.events.subscribe(() => {
-      this.esPaginaLogin = this.router.url.includes('/login');
-    });
-    const userData = localStorage.getItem('usuario');
-    if (userData) {
-      this.usuario = JSON.parse(userData);
-    }
-    this.obtenerPerfilUsuario(); 
-    console.log('Usuario desde localStorage:', userData);
 
-    
+  ngOnInit(): void {
+    this.verificarRutaYUsuario();
+
+  
+    this.router.events
+      .pipe(filter(event => event instanceof NavigationEnd))
+      .subscribe(() => {
+        this.verificarRutaYUsuario();
+      });
   }
 
-obtenerPerfilUsuario(): void {
+  verificarRutaYUsuario(): void {
+    this.esPaginaLogin = this.router.url.includes('/login');
+    this.obtenerPerfilUsuario();
+  }
+
+  obtenerPerfilUsuario(): void {
     this.usuarioService.obtenerPerfil().subscribe({
       next: (response) => {
         this.usuario = response.usuario;
-        console.log('Perfil:', this.usuario);
+        console.log(' Usuario desde backend:', this.usuario);
       },
-      error: (error) => console.error('Error al obtener perfil', error)
+      error: () => {
+        this.usuario = null;
+      }
     });
   }
-  
+
+  irAlInicio(): void {
+    if (this.usuario?.tipoUsuario=== 'administrador') {
+      this.router.navigate(['/vistaAdmin']);
+    } else {
+      this.router.navigate(['/libros']);
+    }
+  }
+
+  cerrarSesion(): void {
+    localStorage.clear();
+    this.usuario = null;
+    this.router.navigate(['/login']);
+  }
 }

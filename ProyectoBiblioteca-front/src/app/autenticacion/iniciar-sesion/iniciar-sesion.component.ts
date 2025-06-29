@@ -52,15 +52,15 @@ export class IniciarSesionComponent implements OnInit {
           const tipo = decoded.tipoUsuario;
           const correo = decoded.sub || decoded.email || decoded.correo; // ajusta según tu token
 
-          // Guarda tipo y correo
+   
           localStorage.setItem('tipo', tipo);
           localStorage.setItem('correo', correo);
 
-          // Redirige según tipo
+   
           if (tipo === 'administrador') {
-            this.route.navigate(['/libros']);
-          } else if (tipo === 'cliente') {
             this.route.navigate(['/vistaAdmin']);
+          } else if (tipo === 'cliente') {
+            this.route.navigate(['/libros']);
           } else {
             this.alertaError('Tipo de usuario desconocido');
           }

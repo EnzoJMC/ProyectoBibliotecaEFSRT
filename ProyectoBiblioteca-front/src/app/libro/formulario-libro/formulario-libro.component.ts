@@ -27,7 +27,7 @@ export class FormularioLibroComponent implements OnInit {
   autor: [''],
   anioPublicacion: [''],
   resumen: [''],
-  categoria: [''], // 👈 nuevo campo
+  categoria: [''], 
 });
   }
 
