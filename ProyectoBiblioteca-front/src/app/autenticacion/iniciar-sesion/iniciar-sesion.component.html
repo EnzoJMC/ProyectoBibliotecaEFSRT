@@ -1,24 +1,28 @@
-<div class="container">
-
-  <div class="login">
-    <h2>Inicio de sesion</h2>
+<div class="container d-flex justify-content-center align-items-center" style="margin-top: 5%;">
+  <div class="card shadow p-4 rounded-4" style="max-width: 400px; width: 100%;">
+    <div class="text-center mb-4">
+      <h2 class="fw-bold text-primary">Iniciar Sesión</h2>
+    </div>
+    
     <form [formGroup]="formLogin">
       <div class="mb-3">
-        <label for="exampleFormControlInput1" class="form-label">Correo electronico</label>
-        <input type="email" class="form-control" formControlName="email">
+        <label for="email" class="form-label">Email</label>
+        <input type="email" id="email" class="form-control"  formControlName="email">
       </div>
+
       <div class="mb-3">
-        <label for="inputPassword" class="col-sm-2 col-form-label">Contraseña</label>
-          <input type="password" class="form-control" formControlName="password">
+        <label for="password" class="form-label">Contraseña</label>
+        <input type="password" id="password" class="form-control"formControlName="password">
       </div>
-      <div class="mb-3">
-        <span><a href="#">¿Olvidaste tu contraseña?</a></span>
+
+      <div class="mb-3 text-end">
+        <a href="#" class="text-decoration-none text-muted small">¿Olvidaste tu contraseña?</a>
       </div>
-        <div class="mb-3">
-          <button type="submit" class="btn btn-primary mb-3" (click)="login()">Ingresar</button>
-        </div>
+
+      <div class="d-grid gap-2">
+        <button type="submit" class="btn btn-primary" (click)="login()">Ingresar</button>
+        <button type="button" class="btn btn-outline-secondary" routerLink="/registrar">Registrarse</button>
+      </div>
     </form>
   </div>
-
 </div>
-

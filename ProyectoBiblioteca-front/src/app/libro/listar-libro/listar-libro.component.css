@@ -1,9 +1,9 @@
-/* Contenedor con proporción 3:4 */
+
 .portada-container {
   position: relative;
   width: 100%;
   padding-top: 133.33%;
-  background: #f0f8ff; /* Fondo suave */
+  background: #f0f8ff; 
   border-radius: 10px 10px 0 0;
   overflow: hidden;
 }
@@ -18,7 +18,6 @@
   padding: 10px;
 }
 
-/* Tarjeta pequeña y elegante */
 .feature-card {
   max-width: 220px;
   font-size: 0.85rem;
@@ -28,14 +27,15 @@
   background: linear-gradient(145deg, #ffffff, #e6e6e6);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
+ 
 }
+
 
 .feature-card:hover {
   transform: translateY(-5px);
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
-/* Título y textos */
 .feature-card .card-title {
   font-size: 1rem;
   color: #0d6efd;
@@ -47,7 +47,6 @@
   color: #333;
 }
 
-/* Botón */
 .feature-card .btn {
   font-size: 0.75rem;
   padding: 6px 12px;
@@ -66,7 +65,6 @@
   background-color: #0bbce0;
 }
 
-/* Opcional: animación al entrar */
 .feature-card {
   animation: fadeInUp 0.4s ease both;
 }
@@ -91,7 +89,6 @@
   flex-wrap: wrap;
 }
 
-/* Botones elegantes */
 .menu-acciones .btn {
   border-radius: 30px;
   padding: 8px 16px;
@@ -105,7 +102,6 @@
   box-shadow: 0 5px 12px rgba(0, 0, 0, 0.15);
 }
 
-/* Personalización de colores */
 .menu-acciones .btn-outline-info {
   border-color: #0dcaf0;
   color: #0dcaf0;
@@ -135,7 +131,7 @@
   background-color: #bb2d3b;
 }
 
-/* Estilo para los botones negros */
+
 .btn-black {
   background-color: #000;
   color: #fff;
@@ -161,6 +157,7 @@
 
 .carousel-item {
   padding: 10px 0;
+  
 }
 
 .carousel-control-prev-icon,
@@ -169,6 +166,13 @@
   border-radius: 50%;
 }
 
+.carousel-inner {
+  padding: 0 2rem; 
+}
+
+.carousel-control-prev{
+ margin: 0px;
+}
 
 @keyframes fadeInUp {
   0% {

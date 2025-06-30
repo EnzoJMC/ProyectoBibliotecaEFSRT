@@ -17,6 +17,7 @@ import { DetalleRecomendacionComponent } from './recomendacion/detalle-recomenda
 import { MantenimientoUsuarioComponent } from './usuario/mantenimiento-usuario/mantenimiento-usuario.component';
 import { ReservasUsuarioComponent } from './reservas/reservas-usuario/reservas-usuario.component';
 import { ReservasTotalesComponent } from './reservas/reservas-totales/reservas-totales.component';
+import { RegistrarComponent } from './autenticacion/registrar/registrar.component';
 
 const routes: Routes = [
  
@@ -42,6 +43,8 @@ const routes: Routes = [
   
   {path: 'reservasUsuario', component: ReservasUsuarioComponent},
 {path: 'totalReservas', component:  ReservasTotalesComponent},
+
+{path: 'registrar', component: RegistrarComponent}
 ];
 
 @NgModule({

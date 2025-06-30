@@ -50,7 +50,7 @@ export class ListarRecomendacionComponent implements OnInit {
       },
       error: (error) => {
         console.error(' Error al obtener recomendaciones del usuario:', error);
-        Swal.fire('Error', 'No se pudieron cargar las recomendaciones.', 'error');
+        Swal.fire('Error', 'No cuenta con recomendaciones.', 'error');
       }
     });
   }

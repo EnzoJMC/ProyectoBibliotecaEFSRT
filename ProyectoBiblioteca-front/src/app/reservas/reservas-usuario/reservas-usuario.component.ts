@@ -37,7 +37,7 @@ export class ReservasUsuarioComponent implements OnInit {
         }
       },
       error: (error) => {
-        console.error('❌ Error al obtener perfil:', error);
+        console.error(' Error al obtener perfil:', error);
         Swal.fire('Error', 'No se pudo obtener el perfil del usuario.', 'error');
       }
     });
@@ -51,7 +51,7 @@ export class ReservasUsuarioComponent implements OnInit {
         console.log('✅ Reservas del usuario:', this.listaReservas);
       },
       error: (error) => {
-        console.error('❌ Error al obtener reservas del usuario:', error);
+        console.error(' Error al obtener reservas del usuario:', error);
         this.cargando = false;
       }
     });

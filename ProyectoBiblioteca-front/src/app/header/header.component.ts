@@ -10,7 +10,7 @@ import { filter } from 'rxjs/operators';
 export class HeaderComponent implements OnInit {
   usuario: any;
   esPaginaLogin: boolean = false;
-
+esPaginaRegistrar: boolean = false;
   constructor(
     private router: Router,
     private usuarioService: UsuarioService
@@ -29,6 +29,7 @@ export class HeaderComponent implements OnInit {
 
   verificarRutaYUsuario(): void {
     this.esPaginaLogin = this.router.url.includes('/login');
+    this.esPaginaRegistrar = this.router.url.includes('/registrar');
     this.obtenerPerfilUsuario();
   }
 

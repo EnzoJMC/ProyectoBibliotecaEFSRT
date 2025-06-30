@@ -1,1 +1,45 @@
-<p>registrar works!</p>
+<div class="container mt-5">
+    <h1 class="mb-4">Crear Usuario</h1>
+    <form (ngSubmit)="registrarUsuario()" class="needs-validation" novalidate>
+        <div class="mb-3">
+            <label for="nombre" class="form-label">Nombre</label>
+            <input id="nombre" name="nombre" [(ngModel)]="nombre" required class="form-control"
+                placeholder="Ingrese nombre" />
+            <div class="invalid-feedback">
+                Por favor ingrese un nombre válido.
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label for="correo" class="form-label">Correo</label>
+            <input type="email" id="correo" name="correo" [(ngModel)]="correo" required class="form-control"
+                placeholder="ejemplo@correo.com" />
+            <div class="invalid-feedback">
+                Por favor ingrese un correo válido.
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label for="contrasena" class="form-label">Contraseña</label>
+            <input type="password" id="contrasena" name="contrasena" [(ngModel)]="contrasena" required
+                class="form-control" placeholder="********" />
+            <div class="invalid-feedback">
+                La contraseña es obligatoria.
+            </div>
+        </div>
+
+        <div class="mb-4">
+            <label for="tipoUsuario" class="form-label">Tipo de Usuario</label>
+            <select id="tipoUsuario" name="tipoUsuario" [(ngModel)]="tipoUsuario" class="form-select" required>
+                <option value="" disabled selected>Seleccione un tipo</option>
+                <option value="administrador">Administrador</option>
+                <option value="cliente">Cliente</option>
+            </select>
+            <div class="invalid-feedback">
+                Por favor seleccione un tipo de usuario.
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary w-100">Guardar</button>
+    </form>
+</div>

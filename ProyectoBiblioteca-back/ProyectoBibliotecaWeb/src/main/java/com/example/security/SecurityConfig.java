@@ -26,32 +26,28 @@ public class SecurityConfig {
 	
 	
 	@Bean
-	SecurityFilterChain securityFilterChain(HttpSecurity http, AuthenticationManager authManager) throws Exception{
-		
+	SecurityFilterChain securityFilterChain(HttpSecurity http, AuthenticationManager authManager) throws Exception {
+
 		JWTAuthenticationFilter jwtAutheticationFilter = new JWTAuthenticationFilter();
-		jwtAutheticationFilter.setAuthenticationManager(authManager);;
-		jwtAutheticationFilter.setFilterProcessesUrl("/login");;
-		
-		
+		jwtAutheticationFilter.setAuthenticationManager(authManager);
+		jwtAutheticationFilter.setFilterProcessesUrl("/login");
+
 		return http
-				.cors()
-				.and()
-				.csrf().disable()
-				.authorizeRequests()
-				.anyRequest()
-				.authenticated()
-				.and()
-				.httpBasic()
-				.and()
-				.sessionManagement()
-				.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-				.and()
-				.addFilter(jwtAutheticationFilter)
-				.addFilterBefore(jwtAuthorizationFilter,UsernamePasswordAuthenticationFilter.class)
-			
-				.build()
-				;
+			.csrf(csrf -> csrf.disable())
+			.cors()
+			.and()
+			.authorizeHttpRequests(auth -> auth
+				.requestMatchers("/login").permitAll()
+				.requestMatchers("/api/usuarios/crear").permitAll()
+				.requestMatchers("/img/**").permitAll()
+				.anyRequest().authenticated()
+				
+			)
+			.addFilter(jwtAutheticationFilter)
+			.addFilterBefore(jwtAuthorizationFilter, UsernamePasswordAuthenticationFilter.class)
+			.build();
 	}
+
 	
 	@Bean
 	PasswordEncoder passwordEncoder() {

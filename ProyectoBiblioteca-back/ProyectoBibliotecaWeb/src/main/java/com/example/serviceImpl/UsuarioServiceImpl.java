@@ -7,11 +7,13 @@ import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.example.model.Usuario;
@@ -24,6 +26,11 @@ public class UsuarioServiceImpl implements UsuarioService, UserDetailsService {
 	@Autowired
     private UsuarioRepository usuarioRepository;
 
+	@Autowired
+	@Lazy
+	private PasswordEncoder passwordEncoder;
+
+	
     @Override
     public ResponseEntity<Map<String, Object>> listarUsuarios() {
         Map<String, Object> response = new HashMap<>();
@@ -42,24 +49,29 @@ public class UsuarioServiceImpl implements UsuarioService, UserDetailsService {
     }
     
     @Override
-    public ResponseEntity<Map<String, Object>> guardarUsuario(Usuario usuario) {
-        Map<String, Object> response = new HashMap<>();
+	public ResponseEntity<Map<String, Object>> guardarUsuario(Usuario usuario) {
+		Map<String, Object> response = new HashMap<>();
 
-        try {
-            usuario.setFechaRegistro(LocalDateTime.now());
-            Usuario nuevo = usuarioRepository.save(usuario);
+		try {
 
-            response.put("mensaje", "Usuario registrado correctamente.");
-            response.put("usuario", nuevo);
-            response.put("status", HttpStatus.CREATED);
-            return ResponseEntity.status(HttpStatus.CREATED).body(response);
-        } catch (Exception e) {
-            response.put("mensaje", "Error al registrar el usuario: " + e.getMessage());
-            response.put("status", HttpStatus.BAD_REQUEST);
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
-        }
-    }
+			String passEncriptada = passwordEncoder.encode(usuario.getContrasena());
+			usuario.setContrasena(passEncriptada);
 
+			usuario.setFechaRegistro(LocalDateTime.now());
+
+			Usuario nuevo = usuarioRepository.save(usuario);
+
+			response.put("mensaje", "Usuario registrado correctamente.");
+			response.put("usuario", nuevo);
+			response.put("status", HttpStatus.CREATED);
+			return ResponseEntity.status(HttpStatus.CREATED).body(response);
+		} catch (Exception e) {
+			response.put("mensaje", "Error al registrar el usuario: " + e.getMessage());
+			response.put("status", HttpStatus.BAD_REQUEST);
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+		}
+	}
+    
     @Override
     public ResponseEntity<Map<String, Object>> eliminarUsuario(Long id) {
         Map<String, Object> response = new HashMap<>();

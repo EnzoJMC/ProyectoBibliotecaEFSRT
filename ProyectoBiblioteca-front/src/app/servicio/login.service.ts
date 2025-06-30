@@ -25,7 +25,7 @@ export class LoginService {
       if (token) {
         localStorage.setItem('token', token);
       } else {
-        console.error('Error al autentificarse');
+        
       }
       return body;
     }))
